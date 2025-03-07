@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_detail_professor_details",
+  "info": {
+    "displayName": "ProfessorDetails"
+  },
+  "options": {},
+  "attributes": {
+    "specialism": {
+      "type": "string",
+      "required": true
+    },
+    "experience": {
+      "type": "string"
+    }
+  }
+}

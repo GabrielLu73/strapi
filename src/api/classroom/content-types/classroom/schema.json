@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "classrooms",
+  "info": {
+    "singularName": "classroom",
+    "pluralName": "classrooms",
+    "displayName": "Classrooms",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "uid",
+      "required": true,
+      "default": "title_id"
+    },
+    "description": {
+      "type": "text"
+    },
+    "classroomDate": {
+      "type": "date",
+      "required": true
+    },
+    "classroomDetails": {
+      "type": "component",
+      "repeatable": false,
+      "component": "detail.classrooms-details"
+    },
+    "professors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::professor.professor",
+      "inversedBy": "classrooms"
+    }
+  }
+}

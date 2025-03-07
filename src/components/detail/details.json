@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_detail_details",
+  "info": {
+    "displayName": "EventsDetails",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "detailDate": {
+      "type": "date",
+      "required": true
+    },
+    "detailHour": {
+      "type": "time",
+      "required": false
+    },
+    "detailPlace": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
