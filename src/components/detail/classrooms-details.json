@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_detail_classrooms_details",
+  "info": {
+    "displayName": "ClassroomsDetails",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "schedule": {
+      "type": "time",
+      "default": "00:00:00.000",
+      "required": true
+    },
+    "scheduleEnd": {
+      "type": "time",
+      "required": true,
+      "unique": false
+    },
+    "classroom": {
+      "type": "integer"
+    }
+  }
+}

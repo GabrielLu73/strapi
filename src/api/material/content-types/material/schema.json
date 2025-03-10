@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "materials",
+  "info": {
+    "singularName": "material",
+    "pluralName": "materials",
+    "displayName": "Materials"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "materials": {
+      "type": "enumeration",
+      "enum": [
+        "video",
+        "documento",
+        "imagen"
+      ]
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::evento.evento",
+      "inversedBy": "materials"
+    }
+  }
+}
