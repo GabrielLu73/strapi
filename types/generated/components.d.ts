@@ -39,12 +39,61 @@ export interface DetailProfessorDetails extends Struct.ComponentSchema {
   };
 }
 
+export interface MaterialMaterialAudio extends Struct.ComponentSchema {
+  collectionName: 'components_material_material_audios';
+  info: {
+    displayName: 'materialAudio';
+    icon: 'microphone';
+  };
+  attributes: {
+    audio: Schema.Attribute.Media<'audios'>;
+  };
+}
+
+export interface MaterialMaterialImages extends Struct.ComponentSchema {
+  collectionName: 'components_material_material_images';
+  info: {
+    description: '';
+    displayName: 'materialImages';
+    icon: 'picture';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface MaterialMaterialText extends Struct.ComponentSchema {
+  collectionName: 'components_material_material_texts';
+  info: {
+    description: '';
+    displayName: 'materialFiles';
+  };
+  attributes: {
+    files: Schema.Attribute.Media<'files'>;
+  };
+}
+
+export interface MaterialMaterialVideos extends Struct.ComponentSchema {
+  collectionName: 'components_material_material_videos';
+  info: {
+    displayName: 'materialVideos';
+    icon: 'play';
+  };
+  attributes: {
+    videos: Schema.Attribute.Media<'videos'>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'detail.classrooms-details': DetailClassroomsDetails;
       'detail.details': DetailDetails;
       'detail.professor-details': DetailProfessorDetails;
+      'material.material-audio': MaterialMaterialAudio;
+      'material.material-images': MaterialMaterialImages;
+      'material.material-text': MaterialMaterialText;
+      'material.material-videos': MaterialMaterialVideos;
     }
   }
 }

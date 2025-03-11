@@ -401,9 +401,9 @@ export interface ApiClassroomClassroom extends Struct.CollectionTypeSchema {
       'api::professor.professor'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.UID &
+    title: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'title_id'>;
+      Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -454,6 +454,7 @@ export interface ApiEventoEvento extends Struct.CollectionTypeSchema {
 export interface ApiMaterialMaterial extends Struct.CollectionTypeSchema {
   collectionName: 'materials';
   info: {
+    description: '';
     displayName: 'Materials';
     pluralName: 'materials';
     singularName: 'material';
@@ -473,6 +474,14 @@ export interface ApiMaterialMaterial extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     materials: Schema.Attribute.Enumeration<['video', 'documento', 'imagen']>;
+    materialsOp: Schema.Attribute.DynamicZone<
+      [
+        'material.material-videos',
+        'material.material-text',
+        'material.material-images',
+        'material.material-audio',
+      ]
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -713,6 +722,47 @@ export interface PluginI18NLocale extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface PluginRecordLockingOpenEntity
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'open-entity';
+  info: {
+    description: 'List of open entities for record locking plugin.';
+    displayName: 'Open Entity';
+    pluralName: 'open-entities';
+    singularName: 'open-entity';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    connectionId: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    entityDocumentId: Schema.Attribute.String;
+    entityId: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::record-locking.open-entity'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.String;
   };
 }
 
@@ -1095,6 +1145,7 @@ declare module '@strapi/strapi' {
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
+      'plugin::record-locking.open-entity': PluginRecordLockingOpenEntity;
       'plugin::review-workflows.workflow': PluginReviewWorkflowsWorkflow;
       'plugin::review-workflows.workflow-stage': PluginReviewWorkflowsWorkflowStage;
       'plugin::upload.file': PluginUploadFile;

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "material",
     "pluralName": "materials",
-    "displayName": "Materials"
+    "displayName": "Materials",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,6 +24,15 @@
       "relation": "manyToOne",
       "target": "api::evento.evento",
       "inversedBy": "materials"
+    },
+    "materialsOp": {
+      "type": "dynamiczone",
+      "components": [
+        "material.material-videos",
+        "material.material-text",
+        "material.material-images",
+        "material.material-audio"
+      ]
     }
   }
 }

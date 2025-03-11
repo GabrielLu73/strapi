@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_material_material_audios",
+  "info": {
+    "displayName": "materialAudio",
+    "icon": "microphone"
+  },
+  "options": {},
+  "attributes": {
+    "audio": {
+      "allowedTypes": [
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

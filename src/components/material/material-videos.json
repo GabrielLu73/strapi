@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_material_material_videos",
+  "info": {
+    "displayName": "materialVideos",
+    "icon": "play"
+  },
+  "options": {},
+  "attributes": {
+    "videos": {
+      "allowedTypes": [
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
