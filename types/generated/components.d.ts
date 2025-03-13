@@ -39,6 +39,42 @@ export interface DetailProfessorDetails extends Struct.ComponentSchema {
   };
 }
 
+export interface GaleriaEnlace extends Struct.ComponentSchema {
+  collectionName: 'components_galeria_enlaces';
+  info: {
+    displayName: 'enlace';
+    icon: 'cursor';
+  };
+  attributes: {
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface GaleriaImages extends Struct.ComponentSchema {
+  collectionName: 'components_galeria_images';
+  info: {
+    displayName: 'images';
+    icon: 'landscape';
+  };
+  attributes: {
+    images: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface GaleriaRichtext extends Struct.ComponentSchema {
+  collectionName: 'components_galeria_richtexts';
+  info: {
+    displayName: 'richtext';
+    icon: 'bulletList';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+  };
+}
+
 export interface MaterialMaterialAudio extends Struct.ComponentSchema {
   collectionName: 'components_material_material_audios';
   info: {
@@ -84,16 +120,72 @@ export interface MaterialMaterialVideos extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedOpenGraph extends Struct.ComponentSchema {
+  collectionName: 'components_shared_open_graphs';
+  info: {
+    displayName: 'openGraph';
+    icon: 'project-diagram';
+  };
+  attributes: {
+    ogDescription: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    ogImage: Schema.Attribute.Media<'images'>;
+    ogTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 70;
+      }>;
+    ogType: Schema.Attribute.String;
+    ogUrl: Schema.Attribute.String;
+  };
+}
+
+export interface SharedSeo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seos';
+  info: {
+    displayName: 'seo';
+    icon: 'search';
+  };
+  attributes: {
+    canonicalURL: Schema.Attribute.String;
+    keywords: Schema.Attribute.Text;
+    metaDescription: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+        minLength: 50;
+      }>;
+    metaImage: Schema.Attribute.Media<'images'>;
+    metaRobots: Schema.Attribute.String;
+    metaTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    metaViewport: Schema.Attribute.String;
+    openGraph: Schema.Attribute.Component<'shared.open-graph', false>;
+    structuredData: Schema.Attribute.JSON;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'detail.classrooms-details': DetailClassroomsDetails;
       'detail.details': DetailDetails;
       'detail.professor-details': DetailProfessorDetails;
+      'galeria.enlace': GaleriaEnlace;
+      'galeria.images': GaleriaImages;
+      'galeria.richtext': GaleriaRichtext;
       'material.material-audio': MaterialMaterialAudio;
       'material.material-images': MaterialMaterialImages;
       'material.material-text': MaterialMaterialText;
       'material.material-videos': MaterialMaterialVideos;
+      'shared.open-graph': SharedOpenGraph;
+      'shared.seo': SharedSeo;
     }
   }
 }

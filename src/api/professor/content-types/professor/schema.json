@@ -11,7 +11,7 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "professorName": {
+    "name": {
       "type": "string",
       "required": true
     },
@@ -27,7 +27,7 @@
     },
     "email": {
       "type": "email",
-      "required": true
+      "required": false
     },
     "professorDetail": {
       "type": "component",

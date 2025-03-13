@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_galeria_enlaces",
+  "info": {
+    "displayName": "enlace",
+    "icon": "cursor"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

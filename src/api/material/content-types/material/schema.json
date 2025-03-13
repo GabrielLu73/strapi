@@ -33,6 +33,11 @@
         "material.material-images",
         "material.material-audio"
       ]
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": false
     }
   }
 }

@@ -433,6 +433,9 @@ export interface ApiEventoEvento extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Text;
     eventDetails: Schema.Attribute.Component<'detail.details', false> &
       Schema.Attribute.Required;
+    eventGaleria: Schema.Attribute.DynamicZone<
+      ['galeria.richtext', 'galeria.images', 'galeria.enlace']
+    >;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::evento.evento'>;
     materials: Schema.Attribute.Relation<'oneToMany', 'api::material.material'>;
@@ -483,6 +486,7 @@ export interface ApiMaterialMaterial extends Struct.CollectionTypeSchema {
       ]
     >;
     publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -508,7 +512,7 @@ export interface ApiProfessorProfessor extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    email: Schema.Attribute.Email;
     events: Schema.Attribute.Relation<'manyToMany', 'api::evento.evento'>;
     lastname: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -517,11 +521,11 @@ export interface ApiProfessorProfessor extends Struct.CollectionTypeSchema {
       'api::professor.professor'
     > &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     professorDetail: Schema.Attribute.Component<
       'detail.professor-details',
       false
     >;
-    professorName: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

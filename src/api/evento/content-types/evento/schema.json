@@ -47,6 +47,14 @@
       "relation": "oneToMany",
       "target": "api::material.material",
       "mappedBy": "event"
+    },
+    "eventGaleria": {
+      "type": "dynamiczone",
+      "components": [
+        "galeria.richtext",
+        "galeria.images",
+        "galeria.enlace"
+      ]
     }
   }
 }

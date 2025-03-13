@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_galeria_richtexts",
+  "info": {
+    "displayName": "richtext",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "richtext"
+    }
+  }
+}
