@@ -21,7 +21,7 @@ export default {
             populate: ['events'],
         });
 
-        if(allProfessor.length === 0){
+        if(!allProfessor.length){
             return ctx.send({message: `No hay datos para poblarlo de ${eventName}`});
         }
 
