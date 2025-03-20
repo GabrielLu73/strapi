@@ -9,14 +9,17 @@ export default factories.createCoreService('api::professor.professor' , ({ strap
 
             for (const professor of professors){
                 if(professor.name){
-                    const professorToUpper = professor.name.toUpperCase();
+                    const professorNameToUpper = professor.name.charAt(0).toUpperCase() + professor.name.slice(1).toLowerCase();
+                    const professorLastToUpper = professor.lastname.charAt(0).toUpperCase() + professor.lastname.slice(1).toLowerCase();
 
                     const updateProfessor = await strapi.documents('api::professor.professor').update({
                         documentId: professor.documentId,
                         data: {
-                            name: professorToUpper
+                            name: professorNameToUpper,
+                            lastname: professorLastToUpper
                         },
-                        status: 'published',
+                        status : 'published',
+
                     });
                     updateProfessors.push(updateProfessor);
                 }
