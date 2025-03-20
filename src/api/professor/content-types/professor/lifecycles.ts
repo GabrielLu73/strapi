@@ -5,7 +5,7 @@ export default {
         console.log("professores ", {
             documentId: event.params.documentId,
             datos: event.params.data
-        })
+        });
 
         const clases = await strapi.documents('api::classroom.classroom').findMany({
             filters:{
@@ -13,8 +13,8 @@ export default {
                     name: event.params.data.name,
                     lastname: event.params.data.lastname,
                     email: event.params.data.email
-                }
-            }
+                },
+            },
         })
 
         if(clases.length !== data.countClass){
