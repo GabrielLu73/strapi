@@ -7,4 +7,16 @@ export default {
         data.title = data.title.toUpperCase();
       }
     },
+    beforeUpdate: async (event) => {
+      const { data } = event.params;
+      const DISCONNECT = 'disconnected'
+
+      if(data.status === DISCONNECT){
+        await strapi.documents('api::classroom.classroom').update({
+          documentId: event.params.data.documentId,
+          data: event.params.data,
+          status: 'published'
+        });
+      }
+    }
   };

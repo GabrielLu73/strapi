@@ -41,19 +41,32 @@ export default factories.createCoreService('api::professor.professor' , ({ strap
                 filters: {
                     professors: {
                         documentId: professorId,
-                        status: 'published',
                     }
-                }
+                },
+                sort: { createdAt: 'desc' }
             });
 
-            if(activeClass.length >= 5){
-                throw new ApplicationError(
-                    `El profesor no puede tener más de ${limit} clases activas`,
-                    { professorId, currentCount: activeClass.length}
-                );
+            if(activeClass.length >= limit && activeClass.length > 0){
+                const ultimaClasse = activeClass[0];
+                await strapi.documents('api::classroom.classroom').update({
+                    documentId: ultimaClasse.documentId,
+                    data: {
+                        professors: {
+                            disconnect: [professorId]
+                        }
+                    }
+                });
+                return {
+                    success: true,
+                    message: `Se desvinculó la clase más reciente del profesor para mantener el límite de ${limit}`,
+                    unlinkedClass: ultimaClasse.documentId,
+                  };
             }
 
-            return { allowed: true, currentCount: activeClass.length}
+            return {
+                success: true,
+                message: `El profesor tiene ${activeClass.length} clases activas (límite: ${limit})`
+              };
             
 
         }catch(error){
