@@ -1,4 +1,6 @@
 import { factories } from "@strapi/strapi";
+import { errors } from '@strapi/utils';
+const { ApplicationError } = errors;
 
 export default factories.createCoreService('api::professor.professor' , ({ strapi }) => ({
     async nameToUppercase(){
@@ -31,6 +33,31 @@ export default factories.createCoreService('api::professor.professor' , ({ strap
         }catch(error){
             return { success: false, error: error.message};
         }
-        //aaaa
-    },  
+    },
+    async customLimit(professorId : string, limit: number){
+        try{
+
+            const activeClass = await strapi.documents('api::classroom.classroom').findMany({
+                filters: {
+                    professors: {
+                        documentId: professorId,
+                        status: 'published',
+                    }
+                }
+            });
+
+            if(activeClass.length >= 5){
+                throw new ApplicationError(
+                    `El profesor no puede tener más de ${limit} clases activas`,
+                    { professorId, currentCount: activeClass.length}
+                );
+            }
+
+            return { allowed: true, currentCount: activeClass.length}
+            
+
+        }catch(error){
+            console.log(error);
+        }
+    }
 }));

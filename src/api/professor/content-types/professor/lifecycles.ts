@@ -15,11 +15,14 @@ export default {
                     email: event.params.data.email
                 }
             }
-        })
+        });
 
         if(clases.length !== data.countClass){
             data.countClass = clases.length;
         }
         
     },
+    beforeCreate: async (event) => {
+        const class = await strapi.documents('')
+    }
   };
