@@ -1,4 +1,14 @@
 export default {
+    afterCreate: async (event) => {
+
+        if(event.params.data.documentId){
+            try{
+                await strapi.service('api::professor.custom-professor-01').customLimit(event.params.data.documentId, 3);
+             }catch(error){
+                 console.log(error);
+             }
+        }
+    },
     beforeUpdate: async (event) =>{
         const { data } = event.params;
 
@@ -21,16 +31,6 @@ export default {
             data.countClass = clases.length;
         }
         
-    },
-    beforeCreate: async (event) => {
-
-        if(event.params.data.documentId){
-            try{
-                await strapi.service('api::professor.custom-professor-01').customLimit(event.params.data.documentId, 3);
-             }catch(error){
-                 console.log(error);
-             }
-        }
     },
     afterUpdate: async (event) => {
         const { data } = event.params;
