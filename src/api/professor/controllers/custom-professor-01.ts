@@ -10,5 +10,5 @@ export default factories.createCoreController('api::professor.professor', ({ str
         }catch (error){
             console.log(error);
         }
-    }
+    },
 }));
